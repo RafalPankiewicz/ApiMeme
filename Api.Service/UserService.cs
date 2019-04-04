@@ -1,13 +1,16 @@
+﻿using Api.Database;
+using Api.Database.Entity;
+using Api.Helpers;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using WebApi.Entities;
-using WebApi.Helpers;
 
-namespace WebApi.Services
+namespace Api.Service
 {
     public interface IUserService
     {
+
         User Authenticate(string username, string password);
         IEnumerable<User> GetAll();
         User GetById(int id);
@@ -29,6 +32,7 @@ namespace WebApi.Services
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
                 return null;
+
 
             var user = _context.Users.SingleOrDefault(x => x.Username == username);
 

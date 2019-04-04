@@ -4,13 +4,14 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
-using WebApi.Helpers;
-using WebApi.Services;
 using AutoMapper;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
+using Api.Database;
+using Api.Helpers;
+using Api.Service;
 
 namespace WebApi
 {

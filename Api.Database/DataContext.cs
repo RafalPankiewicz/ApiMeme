@@ -1,7 +1,8 @@
+﻿using Api.Database.Entity;
 using Microsoft.EntityFrameworkCore;
-using WebApi.Entities;
+using System;
 
-namespace WebApi.Helpers
+namespace Api.Database
 {
     public class DataContext : DbContext
     {

@@ -1,4 +1,6 @@
-namespace WebApi.Entities
+﻿using System;
+
+namespace Api.Database.Entity
 {
     public class User
     {

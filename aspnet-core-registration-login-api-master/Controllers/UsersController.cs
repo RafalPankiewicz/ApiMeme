@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using System.IdentityModel.Tokens.Jwt;
-using WebApi.Helpers;
 using Microsoft.Extensions.Options;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
-using WebApi.Services;
-using WebApi.Dtos;
-using WebApi.Entities;
+using Api.Service;
+using Api.Helpers;
+using Api.DTO;
+using Api.Database.Entity;
 
 namespace WebApi.Controllers
 {

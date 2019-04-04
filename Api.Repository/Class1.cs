@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ApiPair11
+namespace Api.Repository
 {
     public class Class1
     {

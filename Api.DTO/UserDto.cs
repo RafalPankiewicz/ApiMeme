@@ -1,5 +1,8 @@
-namespace WebApi.Dtos
+﻿using System;
+
+namespace Api.DTO
 {
+   
     public class UserDto
     {
         public int Id { get; set; }

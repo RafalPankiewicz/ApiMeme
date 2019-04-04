@@ -1,8 +1,11 @@
+﻿using System;
 using AutoMapper;
-using WebApi.Dtos;
-using WebApi.Entities;
+using System.Collections.Generic;
+using System.Text;
+using Api.Database.Entity;
+using Api.DTO;
 
-namespace WebApi.Helpers
+namespace Api.Helpers
 {
     public class AutoMapperProfile : Profile
     {
