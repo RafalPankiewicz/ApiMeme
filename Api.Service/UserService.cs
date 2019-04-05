@@ -1,31 +1,35 @@
 ﻿using Api.Database;
 using Api.Database.Entity;
 using Api.Helpers;
+using Api.Repository;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Api.Service
-{
+{ 
     public interface IUserService
     {
 
         User Authenticate(string username, string password);
         IEnumerable<User> GetAll();
-        User GetById(int id);
-        User Create(User user, string password);
-        void Update(User user, string password = null);
-        void Delete(int id);
+        Task<User> GetById(int id);
+        Task<User>  CreateAsync(User user, string password);
+        Task UpdateAsync(User user, string password = null);
+        Task DeleteAsync(int id);
     }
 
     public class UserService : IUserService
     {
-        private DataContext _context;
+        //  private DataContext _context;
+        private IUserRepository _userRepository;
 
-        public UserService(DataContext context)
+        public UserService(IUserRepository userRepository)
         {
-            _context = context;
+           
+            _userRepository = userRepository;
         }
 
         public User Authenticate(string username, string password)
@@ -34,7 +38,7 @@ namespace Api.Service
                 return null;
 
 
-            var user = _context.Users.SingleOrDefault(x => x.Username == username);
+            var user = _userRepository.GetUserByName(username); 
 
             // check if username exists
             if (user == null)
@@ -50,21 +54,22 @@ namespace Api.Service
 
         public IEnumerable<User> GetAll()
         {
-            return _context.Users;
+            return _userRepository.GetAllUsers();
         }
 
-        public User GetById(int id)
+
+        public async Task<User> GetById(int id)
         {
-            return _context.Users.Find(id);
+            return await _userRepository.GetUserByIdAsync(id);
         }
 
-        public User Create(User user, string password)
+        public async Task<User> CreateAsync(User user, string password)
         {
             // validation
             if (string.IsNullOrWhiteSpace(password))
                 throw new AppException("Password is required");
 
-            if (_context.Users.Any(x => x.Username == user.Username))
+            if (_userRepository.UserExists(user.Username))
                 throw new AppException("Username \"" + user.Username + "\" is already taken");
 
             byte[] passwordHash, passwordSalt;
@@ -73,15 +78,16 @@ namespace Api.Service
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
 
-            _context.Users.Add(user);
-            _context.SaveChanges();
+            _userRepository.AddUser(user);
+           await  _userRepository.SaveAsync();
+            
 
             return user;
         }
 
-        public void Update(User userParam, string password = null)
+        public async Task UpdateAsync(User userParam, string password = null)
         {
-            var user = _context.Users.Find(userParam.Id);
+            var user = await _userRepository.GetUserByIdAsync(userParam.Id);
 
             if (user == null)
                 throw new AppException("User not found");
@@ -89,7 +95,7 @@ namespace Api.Service
             if (userParam.Username != user.Username)
             {
                 // username has changed so check if the new username is already taken
-                if (_context.Users.Any(x => x.Username == userParam.Username))
+                if (_userRepository.UserExists(userParam.Username))
                     throw new AppException("Username " + userParam.Username + " is already taken");
             }
 
@@ -108,17 +114,18 @@ namespace Api.Service
                 user.PasswordSalt = passwordSalt;
             }
 
-            _context.Users.Update(user);
-            _context.SaveChanges();
+            _userRepository.UpdateUser(user);
+            await  _userRepository.SaveAsync();
         }
 
-        public void Delete(int id)
+
+        public async Task DeleteAsync(int id)
         {
-            var user = _context.Users.Find(id);
+            var user = await _userRepository.GetUserByIdAsync(id);
             if (user != null)
             {
-                _context.Users.Remove(user);
-                _context.SaveChanges();
+                _userRepository.DeleteUser(user);
+                await _userRepository.SaveAsync();
             }
         }
 

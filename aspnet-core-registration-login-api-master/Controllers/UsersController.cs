@@ -12,6 +12,7 @@ using Api.Service;
 using Api.Helpers;
 using Api.DTO;
 using Api.Database.Entity;
+using System.Threading.Tasks;
 
 namespace WebApi.Controllers
 {
@@ -69,7 +70,7 @@ namespace WebApi.Controllers
 
         [AllowAnonymous]
         [HttpPost("register")]
-        public IActionResult Register([FromBody]UserDto userDto)
+        public async Task<IActionResult> RegisterAsync([FromBody]UserDto userDto)
         {
             // map dto to entity
             var user = _mapper.Map<User>(userDto);
@@ -77,7 +78,7 @@ namespace WebApi.Controllers
             try 
             {
                 // save 
-                _userService.Create(user, userDto.Password);
+                await _userService.CreateAsync(user, userDto.Password);
                 return Ok();
             } 
             catch(AppException ex)
@@ -96,15 +97,15 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetByIdAsync(int id)
         {
-            var user =  _userService.GetById(id);
+            var user =  await _userService.GetById(id);
             var userDto = _mapper.Map<UserDto>(user);
             return Ok(userDto);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody]UserDto userDto)
+        public async Task<IActionResult> UpdateAsync(int id, [FromBody]UserDto userDto)
         {
             // map dto to entity and set id
             var user = _mapper.Map<User>(userDto);
@@ -113,7 +114,7 @@ namespace WebApi.Controllers
             try 
             {
                 // save 
-                _userService.Update(user, userDto.Password);
+                await _userService.UpdateAsync(user, userDto.Password);
                 return Ok();
             } 
             catch(AppException ex)
@@ -124,9 +125,9 @@ namespace WebApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> DeleteAsync(int id)
         {
-            _userService.Delete(id);
+            await _userService.DeleteAsync(id);
             return Ok();
         }
     }

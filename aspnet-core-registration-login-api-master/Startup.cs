@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Api.Database;
 using Api.Helpers;
 using Api.Service;
+using Api.Repository;
 
 namespace WebApi
 {
@@ -74,6 +75,7 @@ namespace WebApi
 
             // configure DI for application services
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserRepository,UserRepositoty>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
