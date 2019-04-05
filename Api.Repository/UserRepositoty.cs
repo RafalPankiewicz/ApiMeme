@@ -58,7 +58,7 @@ namespace Api.Repository
 
         public void UpdateUser(User user)
         {
-            _context.Entry(user).State = EntityState.Modified;
+            _context.  Entry(user).State = EntityState.Modified;
         }
 
         public void DeleteUser(User user)
