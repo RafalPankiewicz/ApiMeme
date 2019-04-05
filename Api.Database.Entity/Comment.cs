@@ -11,9 +11,11 @@ namespace Api.Database.Entity
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int Id { get; set; }
-
+        public int UserID { get; set; }
         public string Contetnt { get; set; }
         public DateTime CreationDate { get; set; }
+
+        public virtual User User { get; set; }
 
         public virtual Meme Meme { get; set; }
     }
