@@ -13,6 +13,7 @@ using Api.Database;
 using Api.Helpers;
 using Api.Service;
 using Api.Repository;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace WebApi
 {
@@ -80,24 +81,24 @@ namespace WebApi
             services.AddScoped<IMemeRepository, MemeRepository>();
             services.AddScoped<IMemeService, MemeService>();
 
-           /* services.AddSwaggerGen(c =>
+            services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
-            });*/
+            });
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            /*app.UseSwagger();
+            app.UseSwagger();
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
             // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-            });*/
+            });
             // global cors policy
             app.UseCors(x => x
                 .AllowAnyOrigin()

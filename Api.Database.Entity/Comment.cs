@@ -12,6 +12,7 @@ namespace Api.Database.Entity
         [Key]
         public int Id { get; set; }
         public int UserID { get; set; }
+        public int MemeID { get; set; }
         public string Contetnt { get; set; }
         public DateTime CreationDate { get; set; }
 

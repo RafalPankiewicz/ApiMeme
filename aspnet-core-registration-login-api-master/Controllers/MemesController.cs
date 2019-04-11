@@ -82,7 +82,7 @@ namespace WebApi.Controllers
         }
 
         // POST: api/Memes
-        [Authorize]
+     //   [Authorize]
         [HttpPost]
         public async Task<ActionResult<Meme>> PostMeme([FromBody]Meme meme)
         {
@@ -102,7 +102,7 @@ namespace WebApi.Controllers
         }
 
         // DELETE: api/Memes/5
-        [Authorize]
+       // [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Meme>> DeleteMeme(int id)
         {
