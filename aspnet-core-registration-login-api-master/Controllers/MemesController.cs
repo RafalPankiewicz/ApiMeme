@@ -10,6 +10,7 @@ using Api.Database.Entity;
 using Api.Service;
 using Api.Helpers;
 using Microsoft.AspNetCore.Authorization;
+using System.IO;
 
 namespace WebApi.Controllers
 {   
@@ -86,11 +87,37 @@ namespace WebApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Meme>> PostMeme([FromBody]Meme meme)
         {
-            
+
+           
             try
             {
+               
+
+                   var  uploadedFile = Request.Form.Files[0];
+                    if (uploadedFile != null && uploadedFile.Length > 0)
+                    {
+                    Guid g = Guid.NewGuid();
+                    string GuidString = Convert.ToBase64String(g.ToByteArray());
+                    GuidString = GuidString.Replace("=", "");
+                    GuidString = GuidString.Replace("+", "");
+
+                    meme.PhotoName = GuidString;
+
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", GuidString);
+
+                        using (var stream = new FileStream(path, FileMode.Create))
+                        {
+                            await uploadedFile.CopyToAsync(stream);
+                        }
+                    }
+                 
+
+                
+                
                 // save 
                 await _memeService.CreateMemeAsync(meme);
+
+
                 return Ok();
             }
             catch (AppException ex)

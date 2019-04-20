@@ -3,8 +3,33 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Migrations\20190417155005_InitialCreate.cs" />
+    <Compile Remove="Migrations\20190417155005_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20190417155726_Initial2.cs" />
+    <Compile Remove="Migrations\20190417155726_Initial2.Designer.cs" />
+    <Compile Remove="Migrations\20190417161636_Initial3.cs" />
+    <Compile Remove="Migrations\20190417161636_Initial3.Designer.cs" />
+    <Compile Remove="Migrations\20190417163837_Initial4.cs" />
+    <Compile Remove="Migrations\20190417163837_Initial4.Designer.cs" />
+    <Compile Remove="Migrations\20190420133144_InitialCreate4.cs" />
+    <Compile Remove="Migrations\20190420133144_InitialCreate4.Designer.cs" />
+    <Compile Remove="Migrations\20190420133457_InitialCreate5.cs" />
+    <Compile Remove="Migrations\20190420133457_InitialCreate5.Designer.cs" />
+    <Compile Remove="Migrations\20190420134336_InitialCreate6.cs" />
+    <Compile Remove="Migrations\20190420134336_InitialCreate6.Designer.cs" />
+    <Compile Remove="Migrations\20190420135352_InitialCreate7.cs" />
+    <Compile Remove="Migrations\20190420135352_InitialCreate7.Designer.cs" />
+    <Compile Remove="Migrations\20190420135427_InitialCreate8.cs" />
+    <Compile Remove="Migrations\20190420135427_InitialCreate8.Designer.cs" />
+    <Compile Remove="Migrations\20190420141009_Initial.cs" />
+    <Compile Remove="Migrations\20190420141009_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20190420145414_Initial.cs" />
+    <Compile Remove="Migrations\20190420145414_Initial.Designer.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="8.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="MediaTypeMap" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
@@ -14,5 +39,8 @@
     <ProjectReference Include="..\Api.DTO\Api.DTO.csproj" />
     <ProjectReference Include="..\Api.Service\Api.Service.csproj" />
     <ProjectReference Include="..\ApiPair11\Api.Helpers.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="download\" />
   </ItemGroup>
 </Project>

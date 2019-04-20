@@ -22,6 +22,6 @@ namespace Api.Database.Entity
 
         public virtual User User { get; set; }
 
-        public virtual IEnumerable<Comment> comments { get; set; }
+        public virtual IEnumerable<Comment> Comments { get; set; }
     }
 }

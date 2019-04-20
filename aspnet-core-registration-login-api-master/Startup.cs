@@ -30,7 +30,10 @@ namespace WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
-            services.AddDbContext<DataContext>(x => x.UseInMemoryDatabase("TestDb"));
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=EFGetStarted.AspNetCore.NewDb;Trusted_Connection=True;ConnectRetryCount=0";
+            services.AddDbContext<DataContext>
+                (options => options.UseSqlServer(connection, b => b.MigrationsAssembly("WebApi")));
+           // services.AddDbContext<DataContext>(x => x.UseSqlServer("Server = (localdb)\\mssqllocaldb; Database = Pair; Trusted_Connection = True; MultipleActiveResultSets = true"));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddAutoMapper();
 
@@ -80,11 +83,13 @@ namespace WebApi
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IMemeRepository, MemeRepository>();
             services.AddScoped<IMemeService, MemeService>();
-
+            services.AddScoped<ICommentRepository, CommentRepository>();
+            services.AddScoped<ICommentService, CommentService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
             });
+            
 
         }
 
@@ -92,6 +97,7 @@ namespace WebApi
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseSwagger();
+            app.UseStaticFiles();
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
             // specifying the Swagger JSON endpoint.
