@@ -40,7 +40,4 @@
     <ProjectReference Include="..\Api.Service\Api.Service.csproj" />
     <ProjectReference Include="..\ApiPair11\Api.Helpers.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="download\" />
-  </ItemGroup>
 </Project>

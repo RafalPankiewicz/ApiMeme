@@ -11,6 +11,7 @@ using Api.Service;
 using Api.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using System.IO;
+using MimeTypes;
 
 namespace WebApi.Controllers
 {   
@@ -100,10 +101,11 @@ namespace WebApi.Controllers
                     string GuidString = Convert.ToBase64String(g.ToByteArray());
                     GuidString = GuidString.Replace("=", "");
                     GuidString = GuidString.Replace("+", "");
-
+                    
+                    GuidString += MimeTypeMap.GetMimeType(Path.GetExtension(uploadedFile.FileName));
                     meme.PhotoName = GuidString;
 
-                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", GuidString);
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "download", GuidString);
 
                         using (var stream = new FileStream(path, FileMode.Create))
                         {

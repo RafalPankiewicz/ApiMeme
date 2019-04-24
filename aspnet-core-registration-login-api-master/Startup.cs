@@ -35,6 +35,8 @@ namespace WebApi
                 (options => options.UseSqlServer(connection, b => b.MigrationsAssembly("WebApi")));
            // services.AddDbContext<DataContext>(x => x.UseSqlServer("Server = (localdb)\\mssqllocaldb; Database = Pair; Trusted_Connection = True; MultipleActiveResultSets = true"));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().AddJsonOptions(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
             services.AddAutoMapper();
 
             // configure strongly typed settings objects
