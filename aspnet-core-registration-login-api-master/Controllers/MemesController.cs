@@ -86,48 +86,28 @@ namespace WebApi.Controllers
         // POST: api/Memes
      //   [Authorize]
         [HttpPost]
-        public async Task<ActionResult<Meme>> PostMeme([FromBody]Meme meme)
+        public async Task<ActionResult> PostMeme([FromBody] Meme meme)
         {
+            
 
            
-            try
-            {
-               
+                try {
+       
 
-                   var  uploadedFile = Request.Form.Files[0];
-                    if (uploadedFile != null && uploadedFile.Length > 0)
-                    {
-                    Guid g = Guid.NewGuid();
-                    string GuidString = Convert.ToBase64String(g.ToByteArray());
-                    GuidString = GuidString.Replace("=", "");
-                    GuidString = GuidString.Replace("+", "");
-                    
-                    GuidString += MimeTypeMap.GetMimeType(Path.GetExtension(uploadedFile.FileName));
-                    meme.PhotoName = GuidString;
-
-                    var path = Path.Combine(Directory.GetCurrentDirectory(), "download", GuidString);
-
-                        using (var stream = new FileStream(path, FileMode.Create))
-                        {
-                            await uploadedFile.CopyToAsync(stream);
-                        }
-                    }
-                 
-
-                
-                
-                // save 
-                await _memeService.CreateMemeAsync(meme);
+                 meme.CerationDate = DateTime.Now;
+                 // save 
+                 await _memeService.CreateMemeAsync(meme);
 
 
-                return Ok();
-            }
-            catch (AppException ex)
-            {
-                // return error message if there was an exception
-                return BadRequest(new { message = ex.Message });
-            }
-          
+
+                 return Ok();
+             }
+             catch (AppException ex)
+             {
+                 // return error message if there was an exception
+                 return BadRequest(new { message = ex.Message });
+             }
+            
         }
 
         // DELETE: api/Memes/5
