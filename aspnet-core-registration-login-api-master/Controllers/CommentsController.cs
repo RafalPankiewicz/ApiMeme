@@ -33,6 +33,13 @@ namespace WebApi.Controllers
             return Ok(await _commentService.GetAllComment());
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<IEnumerable<Comment>>> GetCommentsByMemeID(int id)
+        {
+
+            return Ok(await _commentService.GetAllCommentByMemeId(id));
+        }
+
         // GET: api/Comments/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Comment>> GetComment(int id)

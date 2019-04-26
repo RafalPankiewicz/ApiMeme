@@ -11,6 +11,7 @@ namespace Api.Service
     public interface ICommentService
     {
         Task<IEnumerable<Comment>> GetAllComment();
+        Task<IEnumerable<Comment>> GetAllCommentByMemeId(int id);
         Task<Comment> GetCommentByIdAsync(int id);
 
         Task CreateCommentAsync(Comment comment);
@@ -32,6 +33,7 @@ namespace Api.Service
             _CommentRepository.AddComment(Comment);
             await _CommentRepository.SaveAsync();
         }
+ 
 
         public async Task DeleteCommentAsync(int id)
         {
@@ -47,6 +49,11 @@ namespace Api.Service
         public async Task<IEnumerable<Comment>> GetAllComment()
         {
             return await _CommentRepository.GetAllComment();
+        }
+
+        public async Task<IEnumerable<Comment>> GetAllCommentByMemeId(int id)
+        {
+            return await _CommentRepository.GetAllCommentByMemeId(id);
         }
 
         public async Task<Comment> GetCommentByIdAsync(int id)

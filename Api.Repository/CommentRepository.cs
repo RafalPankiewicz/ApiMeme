@@ -3,6 +3,7 @@ using Api.Database.Entity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,6 +13,7 @@ namespace Api.Repository
     public interface ICommentRepository
     {
         Task<IEnumerable<Comment>> GetAllComment();
+        Task<IEnumerable<Comment>> GetAllCommentByMemeId(int id);
         Task<Comment> GetCommentByIdAsync(int id);
 
         void AddComment(Comment comment);
@@ -43,6 +45,10 @@ namespace Api.Repository
             return await _context.Comments.ToListAsync();
         }
 
+        public async Task<IEnumerable<Comment>> GetAllCommentByMemeId(int id)
+        {
+            return await _context.Comments.Where(c => c.MemeID == id).ToListAsync();
+        }
         public async Task<Comment> GetCommentByIdAsync(int id)
         {
             return await _context.Comments.FindAsync(id);
