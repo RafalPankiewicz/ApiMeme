@@ -26,18 +26,23 @@ namespace WebApi.Controllers
         }
 
         // GET: api/Comments
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Comment>>> GetComments()
-        {
-
-            return Ok(await _commentService.GetAllComment());
-        }
-
-        [HttpGet("{id}")]
+        
+        
+        [Route("GetCommentsByMemeID/{id}")]
         public async Task<ActionResult<IEnumerable<Comment>>> GetCommentsByMemeID(int id)
         {
 
-            return Ok(await _commentService.GetAllCommentByMemeId(id));
+            try
+            {
+                // save 
+                return Ok(await _commentService.GetAllCommentByMemeId(id));
+            }
+            catch (AppException ex)
+            {
+                // return error message if there was an exception
+                return BadRequest(new { message = ex.Message });
+            }
+            
         }
 
         // GET: api/Comments/5
