@@ -10,6 +10,8 @@ using Api.Database.Entity;
 using Api.Service;
 using Api.Helpers;
 using Microsoft.AspNetCore.Authorization;
+using AutoMapper;
+using Api.DTO;
 
 namespace WebApi.Controllers
 {
@@ -19,10 +21,11 @@ namespace WebApi.Controllers
     public class CommentsController : ControllerBase
     {
         private readonly ICommentService _commentService;
-
-        public CommentsController(ICommentService commentService)
+        private IMapper _mapper;
+        public CommentsController(ICommentService commentService, IMapper mapper)
         {
             _commentService = commentService;
+            _mapper = mapper;
         }
 
         // GET: api/Comments
@@ -34,8 +37,10 @@ namespace WebApi.Controllers
 
             try
             {
+                var comments = await _commentService.GetAllCommentByMemeId(id);
+                var Dtos = _mapper.Map<IList<CommentDto>>(comments);
                 // save 
-                return Ok(await _commentService.GetAllCommentByMemeId(id));
+                return Ok(Dtos);
             }
             catch (AppException ex)
             {
@@ -102,6 +107,7 @@ namespace WebApi.Controllers
             try
             {
                 // save 
+                comment.CreationDate = DateTime.Now;
                 await _commentService.CreateCommentAsync(comment);
                 return Ok();
             }

@@ -24,7 +24,6 @@ namespace Api.Repository
     public class CommentRepository : ICommentRepository
     {
         private readonly DataContext _context;
-
         public CommentRepository(DataContext context)
         {
             _context = context;
@@ -47,7 +46,7 @@ namespace Api.Repository
 
         public async Task<IEnumerable<Comment>> GetAllCommentByMemeId(int id)
         {
-            return await _context.Comments.Where(c => c.MemeID == id).ToListAsync();
+            return await _context.Comments.Where(c => c.MemeID == id).Include(c => c.UserComm).ToListAsync();
         }
         public async Task<Comment> GetCommentByIdAsync(int id)
         {

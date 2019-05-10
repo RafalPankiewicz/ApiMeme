@@ -40,7 +40,7 @@ namespace Api.Repository
 
         public async Task<IEnumerable<Meme>> GetAllMeme()
         {
-            return await _context.Memes.ToListAsync();
+            return await _context.Memes.Include(c => c.User).ToListAsync();
         }
 
         public async Task<Meme> GetMemeByIdAsync(int id)

@@ -12,6 +12,8 @@ using Api.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using System.IO;
 using MimeTypes;
+using AutoMapper;
+using Api.DTO;
 
 namespace WebApi.Controllers
 {   
@@ -21,39 +23,39 @@ namespace WebApi.Controllers
     public class MemesController : ControllerBase
     {
         private readonly IMemeService _memeService;
-
-        public MemesController(IMemeService memeService)
+        private IMapper _mapper;
+        public MemesController(IMemeService memeService, IMapper mapper)
         {
             _memeService = memeService;
+            _mapper = mapper;
         }
 
         // GET: api/Memes
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Meme>>> GetMemes()
         {
-    
-            return Ok(await _memeService.GetAllMeme()); 
+            var memes = await _memeService.GetAllMeme();
+            var Dtos = _mapper.Map<IList<MemeDto>>(memes);
+
+            return Ok(Dtos); 
         }
 
         // GET: api/Memes/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Meme>> GetMeme(int id)
         {
-
             try
             {
-                // save 
                 var meme = await _memeService.GetMemeByIdAsync(id);
-                return Ok(meme);
+                var memeDto = _mapper.Map<MemeDto>(meme);              
+                return Ok(memeDto);
             }
             catch (AppException ex)
             {
                 // return error message if there was an exception
                 return BadRequest(new { message = ex.Message });
             }
-           
-
-            
+                      
         }
 
         // PUT: api/Memes/5
@@ -87,19 +89,10 @@ namespace WebApi.Controllers
      //   [Authorize]
         [HttpPost]
         public async Task<ActionResult> PostMeme([FromBody] Meme meme)
-        {
-            
-
-           
+        {     
                 try {
-       
-
                  meme.CerationDate = DateTime.Now;
-                 // save 
                  await _memeService.CreateMemeAsync(meme);
-
-
-
                  return Ok();
              }
              catch (AppException ex)
