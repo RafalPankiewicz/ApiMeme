@@ -73,13 +73,13 @@ namespace Api.Service
         public async Task UpdateCommentAsync(Comment comment)
         {
             var commentt = await _CommentRepository.GetCommentByIdAsync(comment.Id);
-
+          
             if (commentt == null)
                 throw new AppException("Comment not found");
 
 
 
-            _CommentRepository.UpdateComment(commentt);
+            _CommentRepository.UpdateComment(comment);
             await _CommentRepository.SaveAsync();
         }
     }

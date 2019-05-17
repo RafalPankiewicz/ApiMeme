@@ -16,7 +16,7 @@ using AutoMapper;
 using Api.DTO;
 
 namespace WebApi.Controllers
-{   
+{
 
     [Route("api/[controller]")]
     [ApiController]
@@ -36,8 +36,7 @@ namespace WebApi.Controllers
         {
             var memes = await _memeService.GetAllMeme();
             var Dtos = _mapper.Map<IList<MemeDto>>(memes);
-
-            return Ok(Dtos); 
+            return Ok(Dtos);
         }
 
         // GET: api/Memes/5
@@ -47,7 +46,7 @@ namespace WebApi.Controllers
             try
             {
                 var meme = await _memeService.GetMemeByIdAsync(id);
-                var memeDto = _mapper.Map<MemeDto>(meme);              
+                var memeDto = _mapper.Map<MemeDto>(meme);
                 return Ok(memeDto);
             }
             catch (AppException ex)
@@ -55,24 +54,22 @@ namespace WebApi.Controllers
                 // return error message if there was an exception
                 return BadRequest(new { message = ex.Message });
             }
-                      
+
         }
 
         // PUT: api/Memes/5
+
+
+        // POST: api/Memes
         [Authorize]
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutMeme(int id, [FromBody] Meme meme)
+        [HttpPost]
+        public async Task<ActionResult> PostMeme([FromBody] MemeDto memeDto)
         {
-            if (id != meme.Id)
-            {
-                return BadRequest();
-            }
-
-
             try
             {
-                // save 
-                await _memeService.UpdateMemeAsync(meme);
+                memeDto.CerationDate = DateTime.Now;
+                var meme = _mapper.Map<Meme>(memeDto);
+                await _memeService.CreateMemeAsync(meme);
                 return Ok();
             }
             catch (AppException ex)
@@ -80,31 +77,11 @@ namespace WebApi.Controllers
                 // return error message if there was an exception
                 return BadRequest(new { message = ex.Message });
             }
-          
 
-            
-        }
-
-        // POST: api/Memes
-     //   [Authorize]
-        [HttpPost]
-        public async Task<ActionResult> PostMeme([FromBody] Meme meme)
-        {     
-                try {
-                 meme.CerationDate = DateTime.Now;
-                 await _memeService.CreateMemeAsync(meme);
-                 return Ok();
-             }
-             catch (AppException ex)
-             {
-                 // return error message if there was an exception
-                 return BadRequest(new { message = ex.Message });
-             }
-            
         }
 
         // DELETE: api/Memes/5
-       // [Authorize]
+        // [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Meme>> DeleteMeme(int id)
         {
@@ -121,6 +98,40 @@ namespace WebApi.Controllers
             }
         }
 
-   
+        [Route("UpRate/{id}")]
+        public async Task<ActionResult<IEnumerable<Comment>>> UpRate(int id)
+        {
+
+            try
+            {
+                await _memeService.UpRateMemeAsync(id);
+                return Ok();
+            }
+            catch (AppException ex)
+            {
+                // return error message if there was an exception
+                return BadRequest(new { message = ex.Message });
+            }
+
+        }
+
+
+        [Route("DownRate/{id}")]
+        public async Task<ActionResult<IEnumerable<Comment>>> DownRate(int id)
+        {
+
+            try
+            {
+                await _memeService.DownRateMemeAsync(id);
+                return Ok();
+            }
+            catch (AppException ex)
+            {
+                // return error message if there was an exception
+                return BadRequest(new { message = ex.Message });
+            }
+
+        }
+
     }
 }

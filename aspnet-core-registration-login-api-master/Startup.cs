@@ -32,7 +32,7 @@ namespace WebApi
             services.AddCors();
             var connection = @"Server=(localdb)\mssqllocaldb;Database=EFGetStarted.AspNetCore.NewDb;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<DataContext>
-                (options => options.UseSqlServer(connection, b => b.MigrationsAssembly("WebApi")));
+                (options => options.UseSqlServer(connection, b => b.MigrationsAssembly("WebApi")).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)); 
            // services.AddDbContext<DataContext>(x => x.UseSqlServer("Server = (localdb)\\mssqllocaldb; Database = Pair; Trusted_Connection = True; MultipleActiveResultSets = true"));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddMvc().AddJsonOptions(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);

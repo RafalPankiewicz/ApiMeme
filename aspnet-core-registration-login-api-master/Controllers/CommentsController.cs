@@ -57,9 +57,10 @@ namespace WebApi.Controllers
 
             try
             {
-                // save 
-                var Comment = await _commentService.GetCommentByIdAsync(id);
-                return Ok(Comment);
+                 
+                var comment = await _commentService.GetCommentByIdAsync(id);
+                var dto = _mapper.Map<CommentDto>(comment);
+                return Ok(dto);
             }
             catch (AppException ex)
             {
@@ -74,9 +75,9 @@ namespace WebApi.Controllers
         // PUT: api/Comments/5
         [Authorize]
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutComment(int id, [FromBody] Comment comment)
+        public async Task<IActionResult> PutComment(int id, [FromBody] CommentDto commentDto)
         {
-            if (id != comment.Id)
+            if (id != commentDto.Id)
             {
                 return BadRequest();
             }
@@ -85,6 +86,8 @@ namespace WebApi.Controllers
             try
             {
                 // save 
+                commentDto.CreationDate = DateTime.Now;
+                var comment = _mapper.Map<Comment>(commentDto);
                 await _commentService.UpdateCommentAsync(comment);
                 return Ok();
             }
@@ -101,13 +104,14 @@ namespace WebApi.Controllers
         // POST: api/Comments
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult<Comment>> PostComment([FromBody]Comment comment)
+        public async Task<ActionResult<Comment>> PostComment([FromBody]CommentDto commentDto)
         {
 
             try
             {
                 // save 
-                comment.CreationDate = DateTime.Now;
+                commentDto.CreationDate = DateTime.Now;
+                var comment = _mapper.Map<Comment>(commentDto);
                 await _commentService.CreateCommentAsync(comment);
                 return Ok();
             }
@@ -136,6 +140,9 @@ namespace WebApi.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+
+
+       
 
 
     }

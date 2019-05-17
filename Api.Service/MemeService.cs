@@ -17,7 +17,9 @@ namespace Api.Service
         Task CreateMemeAsync(Meme meme);
         Task DeleteMemeAsync(int id);
         Task UpdateMemeAsync(Meme meme);
-        
+        Task UpRateMemeAsync(int id);
+        Task DownRateMemeAsync(int id);
+
     }
     public class MemeService : IMemeService
     {
@@ -44,6 +46,8 @@ namespace Api.Service
             _memeRepository.DeleteMeme(meme);
             await _memeRepository.SaveAsync();           
         }
+
+      
 
         public async Task<IEnumerable<Meme>> GetAllMeme()
         {
@@ -72,6 +76,32 @@ namespace Api.Service
                 throw new AppException("Meme not found");
 
 
+
+            _memeRepository.UpdateMeme(meme);
+            await _memeRepository.SaveAsync();
+        }
+
+        public async Task UpRateMemeAsync(int id)
+        {
+            var meme = await _memeRepository.GetMemeByIdAsync(id);
+
+            if (meme == null)
+                throw new AppException("Meme not found");
+
+            meme.Rate++;
+
+            _memeRepository.UpdateMeme(meme);
+            await _memeRepository.SaveAsync();
+        }
+
+        public async Task DownRateMemeAsync(int id)
+        {
+            var meme = await _memeRepository.GetMemeByIdAsync(id);
+
+            if (meme == null)
+                throw new AppException("Meme not found");
+
+            meme.Rate--;
 
             _memeRepository.UpdateMeme(meme);
             await _memeRepository.SaveAsync();
