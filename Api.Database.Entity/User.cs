@@ -12,6 +12,7 @@ namespace Api.Database.Entity
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
         public bool IsAdmin { get; set; }
+        public bool IsBanned { get; set; }
 
         public virtual IEnumerable<Meme> Memes { get; set; }
         public virtual IEnumerable<Comment> Comments { get; set; }

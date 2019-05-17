@@ -64,7 +64,9 @@ namespace WebApi.Controllers
                 Username = user.Username,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                Token = tokenString
+                Token = tokenString,
+                isAdmin = user.IsAdmin,
+                isBanned = user.IsBanned
             });
         }
 
@@ -132,5 +134,25 @@ namespace WebApi.Controllers
             await _userService.DeleteAsync(id);
             return Ok();
         }
+        [Route("BanUserById/{id}")]
+        public async Task<IActionResult> BanUserById(int id)
+        {
+
+            try
+            {
+                await _userService.BannUserAsync(id);
+
+                // save 
+                return Ok();
+            }
+            catch (AppException ex)
+            {
+                // return error message if there was an exception
+                return BadRequest(new { message = ex.Message });
+            }
+
+        }
+
+
     }
 }
