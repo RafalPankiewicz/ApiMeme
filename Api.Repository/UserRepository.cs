@@ -18,15 +18,12 @@ namespace Api.Repository
         void DeleteUser(User user);
         void UpdateUser(User user);
         Task SaveAsync();
-
-
-
     }
-    public class UserRepositoty:IUserRepository
+    public class UserRepository:IUserRepository
     {
         private DataContext _context;
 
-        public UserRepositoty(DataContext context)
+        public UserRepository(DataContext context)
         {
             _context = context;
         }

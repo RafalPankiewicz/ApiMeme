@@ -3,19 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Helpers", "ApiPair11\Api.Helpers.csproj", "{FBA5F47D-A7FB-49D5-8174-DD686BD06F43}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.Helpers", "ApiPair11\Api.Helpers.csproj", "{FBA5F47D-A7FB-49D5-8174-DD686BD06F43}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "aspnet-core-registration-login-api-master\WebApi.csproj", "{7DEF4390-334A-47C8-92F4-D4C2BE27E42E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Database", "Api.Database\Api.Database.csproj", "{05BC5305-E22E-4800-9148-76EE29B152C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.Database", "Api.Database\Api.Database.csproj", "{05BC5305-E22E-4800-9148-76EE29B152C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Database.Entity", "Api.Database.Entity\Api.Database.Entity.csproj", "{A248BCE8-5343-49B7-9523-B44D925B034D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.Database.Entity", "Api.Database.Entity\Api.Database.Entity.csproj", "{A248BCE8-5343-49B7-9523-B44D925B034D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Service", "Api.Service\Api.Service.csproj", "{B8A311DF-6030-4ED7-BB93-0D16FD1B9727}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.Service", "Api.Service\Api.Service.csproj", "{B8A311DF-6030-4ED7-BB93-0D16FD1B9727}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Repository", "Api.Repository\Api.Repository.csproj", "{0D0AE082-39B2-4E55-A7B5-A3BDA45B9007}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.Repository", "Api.Repository\Api.Repository.csproj", "{0D0AE082-39B2-4E55-A7B5-A3BDA45B9007}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.DTO", "Api.DTO\Api.DTO.csproj", "{320C3FBE-220E-48ED-85E5-8E3248DC0384}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.DTO", "Api.DTO\Api.DTO.csproj", "{320C3FBE-220E-48ED-85E5-8E3248DC0384}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

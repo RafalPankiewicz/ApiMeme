@@ -1,5 +1,12 @@
-# aspnet-core-registration-login-api
+Uruchomie:
 
-ASP.NET Core 2.2 - API for User Management, Authentication and Registration
+W 
 
-For documentation and instructions check out http://jasonwatmore.com/post/2018/06/26/aspnet-core-21-simple-api-for-authentication-registration-and-user-management
+package manager console:
+							Update-Database
+
+
+Jak by nie dzia³a³o to:
+package manager console:
+							Add-Migration InitialCreate3
+							Update-Database

@@ -19,6 +19,7 @@ namespace Api.Service
         Task<User>  CreateAsync(User user, string password);
         Task UpdateAsync(User user, string password = null);
         Task DeleteAsync(int id);
+        Task BannUserAsync(int id);
     }
 
     public class UserService : IUserService
@@ -116,6 +117,18 @@ namespace Api.Service
 
             _userRepository.UpdateUser(user);
             await  _userRepository.SaveAsync();
+        }
+        public async Task BannUserAsync(int id)
+        {
+            var user = await _userRepository.GetUserByIdAsync(id);
+
+            if (user == null)
+                throw new AppException("User not found");
+
+            user.IsBanned = true;
+
+            _userRepository.UpdateUser(user);
+            await _userRepository.SaveAsync();
         }
 
 

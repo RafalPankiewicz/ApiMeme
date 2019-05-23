@@ -13,6 +13,10 @@ namespace Api.Helpers
         {
             CreateMap<User, UserDto>();
             CreateMap<UserDto, User>();
+            CreateMap<Comment, CommentDto>();
+            CreateMap<CommentDto, Comment>();
+            CreateMap<Meme, MemeDto>();
+            CreateMap<MemeDto, Meme>();
         }
     }
 }
