@@ -28,8 +28,7 @@ namespace WebApi.Controllers
             _mapper = mapper;
         }
 
-        // GET: api/Comments
-        
+      
        
         [Route("GetCommentsByMemeID/{id}")]
         public async Task<ActionResult<IEnumerable<Comment>>> GetCommentsByMemeID(int id)
