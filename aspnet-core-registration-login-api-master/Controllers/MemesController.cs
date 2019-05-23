@@ -81,7 +81,7 @@ namespace WebApi.Controllers
         }
 
         // DELETE: api/Memes/5
-        // [Authorize]
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Meme>> DeleteMeme(int id)
         {
@@ -98,6 +98,7 @@ namespace WebApi.Controllers
             }
         }
 
+        
         [Route("UpRate/{id}")]
         public async Task<ActionResult<IEnumerable<Comment>>> UpRate(int id)
         {
@@ -115,7 +116,7 @@ namespace WebApi.Controllers
 
         }
 
-
+        
         [Route("DownRate/{id}")]
         public async Task<ActionResult<IEnumerable<Comment>>> DownRate(int id)
         {
