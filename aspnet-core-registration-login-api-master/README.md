@@ -1,12 +1,8 @@
-Uruchomie:
+Uruchomienie poprzez:
 
-W 
+	WebApi
+
+a nastêpnie zrobic migracjê poprzez Update-Database
 
 package manager console:
-							Update-Database
-
-
-Jak by nie dzia³a³o to:
-package manager console:
-							Add-Migration InitialCreate3
 							Update-Database

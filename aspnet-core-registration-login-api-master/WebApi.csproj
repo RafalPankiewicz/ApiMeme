@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
+    <StartupObject>WebApi.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Migrations\20190417155005_InitialCreate.cs" />
