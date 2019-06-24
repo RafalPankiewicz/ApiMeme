@@ -15,7 +15,7 @@ using Api.DTO;
 
 namespace WebApi.Controllers
 {
-    
+
     [Route("api/[controller]")]
     [ApiController]
     public class CommentsController : ControllerBase
@@ -29,11 +29,9 @@ namespace WebApi.Controllers
         }
 
       
-       
         [Route("GetCommentsByMemeID/{id}")]
         public async Task<ActionResult<IEnumerable<Comment>>> GetCommentsByMemeID(int id)
         {
-
             try
             {
                 var comments = await _commentService.GetAllCommentByMemeId(id);
@@ -46,17 +44,14 @@ namespace WebApi.Controllers
                 // return error message if there was an exception
                 return BadRequest(new { message = ex.Message });
             }
-            
         }
 
         // GET: api/Comments/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Comment>> GetComment(int id)
         {
-
             try
             {
-                 
                 var comment = await _commentService.GetCommentByIdAsync(id);
                 var dto = _mapper.Map<CommentDto>(comment);
                 return Ok(dto);
@@ -66,9 +61,6 @@ namespace WebApi.Controllers
                 // return error message if there was an exception
                 return BadRequest(new { message = ex.Message });
             }
-
-
-
         }
 
         // PUT: api/Comments/5
@@ -80,7 +72,6 @@ namespace WebApi.Controllers
             {
                 return BadRequest();
             }
-
 
             try
             {
@@ -95,9 +86,6 @@ namespace WebApi.Controllers
                 // return error message if there was an exception
                 return BadRequest(new { message = ex.Message });
             }
-
-
-
         }
 
         // POST: api/Comments
@@ -105,7 +93,6 @@ namespace WebApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Comment>> PostComment([FromBody]CommentDto commentDto)
         {
-
             try
             {
                 // save 
@@ -119,7 +106,6 @@ namespace WebApi.Controllers
                 // return error message if there was an exception
                 return BadRequest(new { message = ex.Message });
             }
-
         }
 
         // DELETE: api/Comments/5
@@ -139,10 +125,5 @@ namespace WebApi.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
-
-
-       
-
-
     }
 }

@@ -12,8 +12,7 @@ namespace Api.Repository
     public interface IMemeRepository
     {
         Task <IEnumerable<Meme>> GetAllMeme();
-        Task<Meme> GetMemeByIdAsync(int id);
-        
+        Task<Meme> GetMemeByIdAsync(int id); 
         void AddMeme(Meme meme);
         void DeleteMeme(Meme meme);
         void UpdateMeme(Meme meme);

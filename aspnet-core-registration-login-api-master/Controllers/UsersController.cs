@@ -89,8 +89,6 @@ namespace WebApi.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
-
-
        
         [HttpGet]
         public IActionResult GetAll()
@@ -134,10 +132,11 @@ namespace WebApi.Controllers
             await _userService.DeleteAsync(id);
             return Ok();
         }
+
+     
         [Route("BanUserById/{id}")]
         public async Task<IActionResult> BanUserById(int id)
         {
-
             try
             {
                 await _userService.BannUserAsync(id);
@@ -150,9 +149,6 @@ namespace WebApi.Controllers
                 // return error message if there was an exception
                 return BadRequest(new { message = ex.Message });
             }
-
         }
-
-
     }
 }

@@ -13,7 +13,6 @@ namespace Api.Service
     {
         Task<IEnumerable<Meme>> GetAllMeme();
         Task<Meme> GetMemeByIdAsync(int id);
-
         Task CreateMemeAsync(Meme meme);
         Task DeleteMemeAsync(int id);
         Task UpdateMemeAsync(Meme meme);
@@ -74,8 +73,6 @@ namespace Api.Service
 
             if (meme == null)
                 throw new AppException("Meme not found");
-
-
 
             _memeRepository.UpdateMeme(meme);
             await _memeRepository.SaveAsync();

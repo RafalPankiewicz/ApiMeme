@@ -14,7 +14,6 @@ namespace WebApi.Controllers
     [ApiController]
     public class FilesController : ControllerBase
     {
-
         [HttpGet]
         public async Task<IActionResult> Download(string filename)
         {
@@ -22,14 +21,12 @@ namespace WebApi.Controllers
                 return Content("filename not present");
 
             var path = Path.Combine(Directory.GetCurrentDirectory(), "download", filename);
-
             var memory = new MemoryStream();
             using (var stream = new FileStream(path, FileMode.Open))
             {
                 await stream.CopyToAsync(memory);
             }
             memory.Position = 0;
-
             return File(memory, MimeTypeMap.GetMimeType(Path.GetExtension(path)), Path.GetFileName(path));
         }
 

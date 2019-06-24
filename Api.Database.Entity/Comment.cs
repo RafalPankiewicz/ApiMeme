@@ -18,7 +18,6 @@ namespace Api.Database.Entity
 
         [ForeignKey("UserCommID")]
         public virtual User UserComm { get; set; }
-
         public virtual Meme Meme { get; set; }
     }
 }

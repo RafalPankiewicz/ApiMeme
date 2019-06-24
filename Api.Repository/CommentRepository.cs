@@ -9,13 +9,12 @@ using System.Threading.Tasks;
 
 namespace Api.Repository
 {
- 
+
     public interface ICommentRepository
     {
         Task<IEnumerable<Comment>> GetAllComment();
         Task<IEnumerable<Comment>> GetAllCommentByMemeId(int id);
         Task<Comment> GetCommentByIdAsync(int id);
-
         void AddComment(Comment comment);
         void DeleteComment(Comment comment);
         void UpdateComment(Comment comment);

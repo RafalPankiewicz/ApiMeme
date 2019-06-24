@@ -63,8 +63,6 @@ namespace Api.Repository
             _context.Users.Remove(user);
         }
 
-      
-
         public async Task SaveAsync()
         {
             await _context.SaveChangesAsync();

@@ -13,7 +13,6 @@ namespace Api.Service
         Task<IEnumerable<Comment>> GetAllComment();
         Task<IEnumerable<Comment>> GetAllCommentByMemeId(int id);
         Task<Comment> GetCommentByIdAsync(int id);
-
         Task CreateCommentAsync(Comment comment);
         Task DeleteCommentAsync(int id);
         Task UpdateCommentAsync(Comment comment);
@@ -34,15 +33,15 @@ namespace Api.Service
             await _CommentRepository.SaveAsync();
         }
  
-
         public async Task DeleteCommentAsync(int id)
         {
             var comment = await _CommentRepository.GetCommentByIdAsync(id);
 
             if (comment == null)
                 throw new AppException("Comment not found");
-
+        
             _CommentRepository.DeleteComment(comment);
+
             await _CommentRepository.SaveAsync();
         }
 
@@ -76,8 +75,6 @@ namespace Api.Service
           
             if (commentt == null)
                 throw new AppException("Comment not found");
-
-
 
             _CommentRepository.UpdateComment(comment);
             await _CommentRepository.SaveAsync();

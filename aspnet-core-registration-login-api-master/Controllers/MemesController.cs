@@ -54,11 +54,7 @@ namespace WebApi.Controllers
                 // return error message if there was an exception
                 return BadRequest(new { message = ex.Message });
             }
-
         }
-
-        // PUT: api/Memes/5
-
 
         // POST: api/Memes
         [Authorize]
@@ -77,7 +73,6 @@ namespace WebApi.Controllers
                 // return error message if there was an exception
                 return BadRequest(new { message = ex.Message });
             }
-
         }
 
         // DELETE: api/Memes/5
@@ -102,7 +97,6 @@ namespace WebApi.Controllers
         [Route("UpRate/{id}")]
         public async Task<ActionResult<IEnumerable<Comment>>> UpRate(int id)
         {
-
             try
             {
                 await _memeService.UpRateMemeAsync(id);
@@ -113,14 +107,12 @@ namespace WebApi.Controllers
                 // return error message if there was an exception
                 return BadRequest(new { message = ex.Message });
             }
-
         }
 
         
         [Route("DownRate/{id}")]
         public async Task<ActionResult<IEnumerable<Comment>>> DownRate(int id)
         {
-
             try
             {
                 await _memeService.DownRateMemeAsync(id);
@@ -131,8 +123,6 @@ namespace WebApi.Controllers
                 // return error message if there was an exception
                 return BadRequest(new { message = ex.Message });
             }
-
         }
-
     }
 }

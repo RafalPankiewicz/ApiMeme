@@ -13,15 +13,10 @@ namespace Api.Database.Entity
         public int Id { get; set; }
         public int UserID { get; set; }
         public string Title { get; set; }
-
         public string PhotoName { get; set; }
-
         public int Rate { get; set; }
-
         public DateTime CerationDate { get; set; }
-
         public virtual User User { get; set; }
-
         public virtual IEnumerable<Comment> Comments { get; set; }
     }
 }
