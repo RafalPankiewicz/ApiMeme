@@ -40,6 +40,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Api.Database\Api.Database.csproj" />
     <ProjectReference Include="..\Api.DTO\Api.DTO.csproj" />
+    <ProjectReference Include="..\Api.Helpers\Api.Helpers.csproj" />
     <ProjectReference Include="..\Api.Service\Api.Service.csproj" />
     <ProjectReference Include="..\ApiPair11\Api.Helpers.csproj" />
   </ItemGroup>
