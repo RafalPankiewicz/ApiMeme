@@ -101,7 +101,7 @@ namespace Api.Service
             meme.Rate--;
 
             _memeRepository.UpdateMeme(meme);
-            await _memeRepository.SaveAsync();
+            await _memeRepository.SaveAsync(); 
         }
     }
 }
